@@ -1,0 +1,12 @@
+variables:
+    PROJECT_URL: 'https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/merge_requests'
+    REVIEWERS: '10043654' # Reviewers Gitlab ID List
+
+.gitlab_add_assignee_reviewers:
+  script:
+    - read LAST_MR_ID < <(curl --header "PRIVATE-TOKEN:$TOKEN" "$PROJECT_URL" | jq '.[0] | .iid')
+    - read MR_AUTHOR < <(curl --header "PRIVATE-TOKEN:$TOKEN" "$PROJECT_URL/$LAST_MR_ID" | jq '.author | .id')
+    # add assignee
+    - curl -s --request PUT --header "PRIVATE-TOKEN:$TOKEN" "$PROJECT_URL/$LAST_MR_ID" --form "assignee_ids=$MR_AUTHOR" | jq '.assignees'
+    # add reviewers
+    - curl -s --request PUT --header "PRIVATE-TOKEN:$TOKEN" "$PROJECT_URL/$LAST_MR_ID" --form "reviewer_ids=$REVIEWERS"

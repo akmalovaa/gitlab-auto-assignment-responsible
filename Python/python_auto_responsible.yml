@@ -1,0 +1,7 @@
+.python_add_assignee_reviewers:
+  script:
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r Python/requirements.txt
+    - python Python/main.py

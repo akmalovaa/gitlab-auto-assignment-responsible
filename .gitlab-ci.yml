@@ -1,0 +1,36 @@
+include:
+  - Gitlab/gitlab_auto_responsible.yml
+  - Python/python_auto_responsible.yml
+
+stages:
+  - mr
+  - usual_stage
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_COMMIT_BRANCH
+
+mr-job:
+  stage: mr
+  script:
+    - 'echo Merge request opened by $GITLAB_USER_NAME'
+    #- !reference [.gitlab_add_assignee_reviewers, script]
+    #- !reference [.python_add_assignee_reviewers, script]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+test-python-job:
+  stage: usual_stage
+  script:
+    - echo "Python script run"
+    - !reference [.python_add_assignee_reviewers, script]
+  when: manual
+
+test-gitlab-job:
+  stage: usual_stage
+  script:
+    - echo "Gitlab script run"
+    - !reference [.gitlab_add_assignee_reviewers, script]
+  when: manual
