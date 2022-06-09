@@ -23,6 +23,7 @@ workflow:
 ### Option 1 - Gitlab (pipline)
 add API Token to Settings -> CI/CD -> Variables
 
+script execution steps:
 1. Get last merge request ID
 2. Parse Author
 3. Put Assigne = Author
