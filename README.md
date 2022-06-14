@@ -38,4 +38,4 @@ Change your variables in Python/settings.py
 
 
 ####
-[Ссылка на сайт]([http://example.com/](https://akmalov.com/blog/gitlab-auto-assign/)). 
+[My site](https://akmalov.com/blog/gitlab-auto-assign/).
