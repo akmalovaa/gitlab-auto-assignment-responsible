@@ -35,3 +35,7 @@ script execution steps:
 Simple scripts usage python-gitlab project
 
 Change your variables in Python/settings.py
+
+
+####
+[Ссылка на сайт]([http://example.com/](https://akmalov.com/blog/gitlab-auto-assign/)). 
